@@ -13,10 +13,10 @@ function App() {
     console.log(response.data);
   }
 
-  const getUserById = async (userId) => {
-    const response = await axios.get(BASE_URL + "/users/" + userId);
-    console.log(response.data.username);
-  }
+  // const getUserById = async (userId) => {
+  //   const response = await axios.get(BASE_URL + "/users/" + userId);
+  //   console.log(response.data.username);
+  // }
 
   const createUser = async (newUser) => {
     const response = await axios.post(BASE_URL + "/users", newUser);
@@ -32,7 +32,26 @@ function App() {
     console.log(response.data);
   }
 
+
+
+  const getUserById = async (userId) => {
+    const response = await axios.get(BASE_URL + "/users/" + userId);
+    return response.data.postId;
+  }
+
+  const getPostById = async (postId) => {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts/" + postId);
+    return response.data;
+  }
+
+  const getPost = async () => {
+    const postId = await getUserById(1);
+    const postData = await getPostById(postId);
+    console.log(postData);
+  }
+
   useEffect(() => {
+
     // getAllUsers();
 
     // getUserById(3);
@@ -50,6 +69,10 @@ function App() {
     // updateUser(3, updatedUser);
 
     //deleteUser(3);
+
+
+
+    //getPost();
   }, [])
 
 
